@@ -7,8 +7,11 @@ class PostImagesController < ApplicationController
   def create #投稿画像を保存する
     @post_image = PostImage.new(post_image_params)
     @post_image.user_id = current_user.id
-    @post_image.save
-    redirect_to post_images_path
+    if @post_image.save
+      redirect_to post_images_path
+    else
+      render :new
+    end
   end
   
   def index #投稿画像のリストを表示する
