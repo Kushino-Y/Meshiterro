@@ -12,11 +12,12 @@ class PostImagesController < ApplicationController
   end
   
   def index #投稿画像のリストを表示する
-    @post_images = PostImage.all
+    @post_images = PostImage.page(params[:page]).reverse_order
   end
   
   def show #投稿画像の詳細を表示する
     @post_image = PostImage.find(params[:id])
+    @post_comment = PostComment.new
   end
   
   def destroy #投稿画像を削除する
